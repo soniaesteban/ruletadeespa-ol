@@ -194,10 +194,21 @@ const legend = document.getElementById('legend');
 legend.innerHTML = CATS.map(c=>`<span><i style="background:var(${c.color})"></i>${c.name}</span>`).join('');
 
 let rot = 0, spinning = false;
+// each category comes up once before any repeats, and never twice in a row
+let bag = [], lastCat = null;
+function pickSeg(){
+  if(!bag.length){
+    bag = CATS.map(c=>c.id).sort(()=>Math.random()-.5);
+    if(bag[bag.length-1]===lastCat && bag.length>1){ [bag[0],bag[bag.length-1]]=[bag[bag.length-1],bag[0]]; }
+  }
+  const cat = bag.pop(); lastCat = cat;
+  const opts = SEG.map((s,i)=>s.id===cat?i:-1).filter(i=>i>=0);
+  return opts[Math.floor(Math.random()*opts.length)];
+}
 const spinBtn = document.getElementById('spin');
 function spin(){
   if(spinning) return; spinning = true; spinBtn.disabled = true;
-  const n = SEG.length, idx = Math.floor(Math.random()*n);
+  const n = SEG.length, idx = pickSeg();
   const segDeg = 360/n;
   const target = 360 - idx*segDeg + (Math.random()-.5)*segDeg*0.6;
   const base = rot - (rot % 360);
@@ -237,7 +248,7 @@ function showTask(id){
     ans = `<small>Ejemplo</small>${esc(it.a)}`; reto = esc(it.r);
   } else {
     const it = nextFrom('esc', ESC);
-    html += `<p class="help">Todos escriben a la vez. Después, dos personas lo leen en voz alta.</p><p class="prompt">${esc(it.q)}</p><div class="row" style="align-items:center"><span class="timer" id="clock">2:00</span><button class="btn" id="go">Empezar 2 minutos</button></div>`;
+    html += `<p class="help">Todos escriben a la vez. Después, dos personas lo leen en voz alta.</p><p class="prompt">${esc(it.q)}</p><div class="row" style="align-items:center"><span class="timer" id="clock">1:00</span><button class="btn" id="go">Empezar 1 minuto</button></div>`;
     ans = `<small>Ejemplo</small>${esc(it.a)}`; reto = esc(it.r); timer=true;
   }
   html += `<div class="row"><button class="btn" id="showA">Ver respuesta</button><button class="btn plus" id="showR">Reto +</button></div><div id="extra" style="display:flex;flex-direction:column;gap:12px"></div>`;
@@ -247,7 +258,7 @@ function showTask(id){
   task.querySelector('#showR').onclick = e=>{ extra.insertAdjacentHTML('beforeend',`<div class="reto"><small>Reto + (para quien sabe más)</small>${reto}</div>`); e.target.disabled=true; };
   if(timer){
     const go = task.querySelector('#go'), clock = task.querySelector('#clock');
-    go.onclick = ()=>{ let t=120; go.disabled=true; clearInterval(timerId);
+    go.onclick = ()=>{ let t=60; go.disabled=true; clearInterval(timerId);
       timerId = setInterval(()=>{ t--; clock.textContent = `${Math.floor(t/60)}:${String(t%60).padStart(2,'0')}`; if(t<=0){clearInterval(timerId); clock.textContent='¡Tiempo!';} },1000); };
   }
 }
