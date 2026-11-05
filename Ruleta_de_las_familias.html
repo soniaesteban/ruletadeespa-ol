@@ -125,7 +125,7 @@ const CATS = [
   {id:'fis', name:'¿Cómo es?', color:'--c1', tag:'Físico'},
   {id:'per', name:'Su carácter', color:'--c2', tag:'Personalidad'},
   {id:'pre', name:'Preséntate', color:'--c3', tag:'Presentarse'},
-  {id:'tut', name:'Tutoría', color:'--c4', tag:'En la tutoría'},
+  {id:'tut', name:'Mi rutina', color:'--c4', tag:'Mi rutina'},
   {id:'esc', name:'Escribe', color:'--c5', tag:'Por escrito'}
 ];
 const SEG = [...CATS, ...CATS]; // 10 segments
@@ -144,15 +144,15 @@ const PRE = [
   {q:'¿Cómo es tu pareja?', a:'Es alto, tiene barba y es muy tranquilo.', r:'Describe a otra persona de tu familia.'}
 ];
 const TUT = [
-  {who:'Eres la profesora. El padre pregunta:', q:'¿Cómo es mi hijo en clase?', a:'Es muy trabajador, pero un poco desordenado.', r:'Responde con dos palabras de carácter.'},
-  {who:'Eres la profesora. La madre pregunta:', q:'¿Está contenta en el colegio?', a:'Sí, está muy contenta.', r:'Añade: «Es muy alegre y tiene muchos amigos.»'},
-  {who:'Eres la profesora. El padre pregunta:', q:'¿Tiene amigos?', a:'Sí, tiene muchos amigos. Es muy simpático.', r:'Di el nombre de su mejor amigo.'},
-  {who:'Eres la profesora. La madre pregunta:', q:'¿Dónde se sienta?', a:'Se sienta delante, al lado de Emma.', r:'Usa «al lado de» o «enfrente de».'},
-  {who:'Eres la profesora. El padre pregunta:', q:'¿Tiene deberes?', a:'Sí, tiene deberes los lunes y los miércoles.', r:'Di qué días y a qué hora entrega los deberes.'},
-  {who:'Eres la profesora. La madre pregunta:', q:'¿Qué tal sus notas?', a:'Muy bien. Es muy responsable.', r:'Di una cosa buena y una cosa para mejorar.'},
-  {who:'Eres el padre o la madre. La profesora pregunta:', q:'¿Qué tal en casa?', a:'Bien. Está contento, pero está un poco nervioso.', r:'Explica por qué con «porque».'},
-  {who:'Eres el padre o la madre. La profesora pregunta:', q:'¿Cómo es su hija en casa?', a:'Es muy ordenada y muy responsable.', r:'Di una cosa buena y una cosa difícil.'},
-  {who:'Si no entiendes a la profesora:', q:'¿Qué dices?', a:'¿Puedes repetir, por favor? / Más despacio, por favor.', r:'Haz la tutoría con un compañero y usa estas frases.'}
+  {who:'Responde y después pregunta a un compañero:', q:'¿A qué hora te levantas?', a:'Me levanto a las siete.', r:'Compara: «Yo me levanto a las siete, pero mi pareja se levanta a las seis.»'},
+  {who:'Responde y después pregunta a un compañero:', q:'¿Qué haces por la mañana?', a:'Me ducho, desayuno y voy al trabajo.', r:'Di tres cosas con la hora: «A las siete…, a las ocho…»'},
+  {who:'Responde y después pregunta a un compañero:', q:'¿Cómo vas al trabajo?', a:'Voy en coche. / Voy andando.', r:'Añade a qué hora empiezas a trabajar.'},
+  {who:'Responde y después pregunta a un compañero:', q:'¿Qué haces por la tarde?', a:'Voy al gimnasio y hago la cena.', r:'Di qué haces el lunes y qué haces el viernes.'},
+  {who:'Responde y después pregunta a un compañero:', q:'¿A qué hora cenas?', a:'Ceno a las nueve.', r:'Compara con tu país: «En Alemania cenamos a las…»'},
+  {who:'Responde y después pregunta a un compañero:', q:'¿A qué hora se levanta tu hijo?', a:'Mi hijo se levanta a las siete y media.', r:'Di también a qué hora se acuesta.'},
+  {who:'Responde y después pregunta a un compañero:', q:'¿Cómo va tu hija al colegio?', a:'Va en autobús. / La llevo en coche.', r:'Di a qué hora entra en clase y a qué hora sale.'},
+  {who:'Responde y después pregunta a un compañero:', q:'¿Qué hace tu hijo después del colegio?', a:'Hace los deberes y juega en el parque.', r:'Di qué hace cada día: «El lunes va a natación…»'},
+  {who:'Responde y después pregunta a un compañero:', q:'¿Qué haces los fines de semana?', a:'Voy a la playa con mi familia.', r:'Cuenta tu sábado ideal en tres frases.'}
 ];
 const ESC = [
   {q:'Escribe dos frases sobre tu hijo o tu hija: cómo es físicamente y qué carácter tiene.', a:'Mi hija tiene el pelo largo y los ojos verdes. Es alegre y un poco tímida.', r:'Escribe cuatro frases y usa «pero».'},
@@ -264,7 +264,7 @@ function showTask(id){
 }
 task.innerHTML = `<span class="tag" style="background:var(--c5)">Cómo se juega</span>
 <p class="prompt">Gira la ruleta y haz la tarea que sale.</p>
-<p class="help">Hay cinco tipos de tarea: describir el físico, el carácter, presentarse, la tutoría y escribir. Cada tarjeta tiene «Ver respuesta» y un «Reto +» para quien sabe más.</p>
+<p class="help">Hay cinco tipos de tarea: describir el físico, el carácter, presentarse, la rutina y escribir. Cada tarjeta tiene «Ver respuesta» y un «Reto +» para quien sabe más.</p>
 <div class="row"><button class="btn" id="first">Empezar: girar</button></div>`;
 document.getElementById('first').onclick = spin;
 
